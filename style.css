@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-navy: #191D32;
+    --light-navy: #282F44;
+    --purple: #453A49;
+    --light-burgundy: #b1707f; 
+    --dark-burgundy: #6D3B47;
+}
+
+body {
+    background-color: var(--light-burgundy);
+}
+
+.book-card{
+    width: 200px;
+    height: 200px;
+
+    background-color: #f7e0e5;
+    border: solid var(--light-navy);
+    border-radius: 25px;
+}
