@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin | Library</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="newBook">
-        <button> ➕ New Book</button>
+        
         <form>
             <label for="author">Author</label>
             <input type="text" id="author" name="author">
@@ -22,11 +22,13 @@
             <input type="number" id="pages" name="pages">
 
             
-            <input type="radio" id="read" name="status">
+            <input type="radio" id="read" name="read-status" value="true">
             <label for="read">Read</label>
 
-            <input type="radio" id="unread" name="status">
+            <input type="radio" id="unread" name="read-status" value="false">
             <label for="unread">Unread</label>
+
+            <button type="submit" name="button" class="add-btn"> ➕ Add new book</button>
         
         </form>
     </div>
@@ -36,28 +38,28 @@
             <div class="author">Murakami</div>
             <div class="title">Norwegian Wood</div>
             <div class="pages">304</div>
-            <div class="status">Unread</div>
+            <div class="read">Unread</div>
         </div>
 
         <div class="book-card">
             <div class="author"></div>
             <div class="title"></div>
             <div class="pages"></div>
-            <div class="status"></div>
+            <div class="read"></div>
         </div>
 
         <div class="book-card">
             <div class="author"></div>
             <div class="title"></div>
             <div class="pages"></div>
-            <div class="status"></div>
+            <div class="read"></div>
         </div>
 
         <div class="book-card">
             <div class="author"></div>
             <div class="title"></div>
             <div class="pages"></div>
-            <div class="status"></div>
+            <div class="read"></div>
         </div>
 
 
