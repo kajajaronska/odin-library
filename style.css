@@ -19,10 +19,6 @@ body {
     background-color: var(--dark-navy);
     color: white;
     font-family: var(--font-1);
-/* 
-    display: flex;
-    flex-direction: column;
-    gap: 4rem; */
 
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -54,7 +50,8 @@ form div {
 }
 
 form div:nth-child(4),
-form div:nth-child(5) {
+form div:nth-child(5),
+form div:nth-child(6) {
     flex-direction: row;
     gap: 1rem;
 }
@@ -68,14 +65,55 @@ input {
 
 .books {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 200px);
+    grid-template-columns: repeat(auto-fit, 250px);
+    gap: 1rem;
 }
 
 .book-card{
-    width: 200px;
+    /* width: px; */
     height: 200px;
+    padding: 1rem;
 
     background-color: #f7e0e5;
     border: solid var(--light-navy);
     border-radius: 25px;
+
+    color: var(--dark-navy);
+
+    display: flex;
+    flex-direction: column;
 }
+
+.read {
+    margin: 1rem 0;
+}
+
+.switch-toggle {
+    float: left;
+    background: var(--dark-burgundy);
+    font-size: 0.6rem;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+
+}
+
+.switch-toggle input {
+    position: absolute;
+    opacity: 0;
+}
+
+.switch-toggle input + label {
+    padding: 7px;
+    float: left;
+    color: var(--light-burgundy);
+    cursor: pointer;
+}
+
+/* .switch-toggle input:checked + label {
+    background-color: var(--purple);
+} */
+
+.checked + label{
+    background-color: var(--purple);
+}
+

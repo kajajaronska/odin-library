@@ -29,6 +29,10 @@
           <label for="read">Read</label>
         </div>
         <div>
+          <input type="radio" id="in-progress" name="read-status" value="in-progress" />
+          <label for="read">In progress</label>
+        </div>
+        <div>
           <input type="radio" id="unread" name="read-status" value="false" />
           <label for="unread">Unread</label>
         </div>
@@ -40,10 +44,17 @@
 
     <div class="books">
       <div class="book-card">
-        <div class="author">Murakami</div>
-        <div class="title">Norwegian Wood</div>
-        <div class="pages">304</div>
+        <div class="author">Author: Murakami</div>
+        <div class="title">Title: Norwegian Wood</div>
+        <div class="pages">Pages: 304</div>
         <div class="read">Unread</div>
+        
+
+        <div class="switch-toggle">
+          <input type="radio" class="" id="toggle-read" name="toggle-read" ><label for="toggle-read"  checked="">READ</label>
+          <input type="radio" class="checked testing" id="toggle-in-progress" name="toggle-in-progress" checked="" ><label for="toggle-in-progress">IN PROGRESS</label>
+          <input type="radio" class="" id="toggle-unread" name="toggle-unread"><label for="toggle-unread" checked="" >UNREAD</label>
+        </div>
       </div>
     </div>
   </body>

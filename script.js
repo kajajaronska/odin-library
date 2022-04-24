@@ -1,5 +1,6 @@
 const addBookBtn = document.querySelector(".add-btn");
 const booksSection = document.querySelector(".books");
+const switchOption = document.querySelectorAll('.switch-toggle input');
 
 
 let myLibrary = [
@@ -63,12 +64,34 @@ function createBookCard(){
 
     myLibrary.forEach((book) => {
 
-        author.textContent = book.author;
-        title.textContent = book.title;
-        pages.textContent = book.pages;
+        author.textContent = 'Author: ' + book.author;
+        title.textContent = 'Title: ' + book.title;
+        pages.textContent = 'Pages: ' + book.pages;
         if(book.read) read.textContent = 'Read';
         if(!book.read) read.textContetn = 'Unread';
 
         bookCard.setAttribute('data-index-number', book.indexNum);
     })
 }
+
+//////////////////////////////////
+// Toggle switch functionality
+
+switchOption.forEach(e => {
+
+    e.addEventListener('click', ()=> {
+        console.log('I was clicked!'); 
+
+        // Remove checked class from all options
+        switchOption.forEach(e => {
+            e.classList.remove('checked')
+        })
+
+        // Add checked class to the clicked option
+        e.classList.add('checked');
+        console.log('class added to', this)
+        
+    })
+
+
+})
