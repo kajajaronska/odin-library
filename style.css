@@ -124,9 +124,14 @@ input {
     background-color: var(--purple);
 } */
 
-.checked + label{
+.checked + label {
+    background-color: var(--purple);
+    border-radius: 10px;
+}
+
+/* .checked + label{
     background-color: var(--purple);
     border-radius: 10px;
     font-style: bold;
-}
+} */
 
