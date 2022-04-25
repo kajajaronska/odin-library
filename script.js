@@ -30,7 +30,7 @@ function addBookToLibrary(e) {
     let author = document.getElementById("author").value;
     let title = document.getElementById("title").value;
     let pages = document.getElementById("pages").value;
-    let read = document.getElementById("read").value;
+    let read = document.querySelector('input[name="read-progress"]:checked').value;
     
     myLibrary.push(new Book(author, title, pages, read, indexNumCounter));
 
@@ -55,10 +55,11 @@ function createBookCard(){
     let pages = document.createElement('div');
     pages.classList.add('pages');
 
-    // let read = document.createElement('div');
-    // read.classList.add('read');
+    let toggleSwitch = '<div class="switch-toggle"><input type="radio" class="" id="toggle-read" name="toggle-read" ><label for="toggle-read"  checked="">READ</label><input type="radio" class="checked" id="toggle-in-progress" name="toggle-in-progress" checked="" ><label for="toggle-in-progress">IN PROGRESS</label><input type="radio" class="" id="toggle-unread" name="toggle-unread"><label for="toggle-unread" checked="" >UNREAD</label></div>'
 
+    
     bookCard.append(author, title, pages);
+    bookCard.insertAdjacentHTML("beforeend", toggleSwitch);
 
     booksSection.append(bookCard);
 
@@ -67,6 +68,7 @@ function createBookCard(){
         author.textContent = 'Author: ' + book.author;
         title.textContent = 'Title: ' + book.title;
         pages.textContent = 'Pages: ' + book.pages;
+        if(book.read.value === 'in-progress') 
         // if(book.read) read.textContent = 'Read';
         // if(!book.read) read.textContent = 'Unread';
 
