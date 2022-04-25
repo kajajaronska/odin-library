@@ -55,10 +55,10 @@ function createBookCard(){
     let pages = document.createElement('div');
     pages.classList.add('pages');
 
-    let read = document.createElement('div');
-    read.classList.add('read');
+    // let read = document.createElement('div');
+    // read.classList.add('read');
 
-    bookCard.append(author, title, pages, read);
+    bookCard.append(author, title, pages);
 
     booksSection.append(bookCard);
 
@@ -67,8 +67,8 @@ function createBookCard(){
         author.textContent = 'Author: ' + book.author;
         title.textContent = 'Title: ' + book.title;
         pages.textContent = 'Pages: ' + book.pages;
-        if(book.read) read.textContent = 'Read';
-        if(!book.read) read.textContetn = 'Unread';
+        // if(book.read) read.textContent = 'Read';
+        // if(!book.read) read.textContent = 'Unread';
 
         bookCard.setAttribute('data-index-number', book.indexNum);
     })
@@ -91,7 +91,6 @@ switchOption.forEach(e => {
         e.classList.add('checked');
         console.log('class added to', this)
         
-    })
+    });
 
-
-})
+});
