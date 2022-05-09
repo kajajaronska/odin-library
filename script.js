@@ -2,6 +2,8 @@ const addBookBtn = document.querySelector(".add-btn");
 const booksSection = document.querySelector(".books");
 const bookCard = document.querySelectorAll(".book-card");
 
+const form = document.querySelector("form");
+
 let myLibrary = [];
 
 let indexNumCounter = 0;
@@ -33,6 +35,8 @@ function addBookToLibrary(e) {
   myLibrary.push(new Book(author, title, pages, read, indexNumCounter));
 
   createBookCard();
+
+  resetForm();
 
   return;
 }
@@ -94,16 +98,22 @@ function createBookCard() {
   }
 }
 
+// Resetting form fiels after submitting
+
+const resetForm = function () {
+  document.getElementById("author").value = "";
+  document.getElementById("title").value = "";
+  document.getElementById("pages").value = "";
+};
+
 //////////////////////////////////
 // Toggle switch functionality
 
 document.addEventListener("click", function (e) {
-  
   if (e.target.id === "label-toggle-unread") {
-
     let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
     console.log(bookIndexNum);
- 
+
     let unread = document.querySelector(
       `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
     );
@@ -114,18 +124,16 @@ document.addEventListener("click", function (e) {
     let inProgress = document.querySelector(
       `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-in-progress`
     );
-    
-    unread.classList.add('checked');
-    read.classList.remove('checked');
-    inProgress.classList.remove('checked');
 
+    unread.classList.add("checked");
+    read.classList.remove("checked");
+    inProgress.classList.remove("checked");
   }
 
   if (e.target.id === "label-toggle-read") {
-
     let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
     console.log(bookIndexNum);
- 
+
     let unread = document.querySelector(
       `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
     );
@@ -136,34 +144,30 @@ document.addEventListener("click", function (e) {
     let inProgress = document.querySelector(
       `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-in-progress`
     );
-    
-    unread.classList.remove('checked');
-    read.classList.add('checked');
-    inProgress.classList.remove('checked');
 
+    unread.classList.remove("checked");
+    read.classList.add("checked");
+    inProgress.classList.remove("checked");
   }
   if (e.target.id === "label-toggle-in-progress") {
     {
-
       let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
       console.log(bookIndexNum);
-   
+
       let unread = document.querySelector(
         `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
       );
       let read = document.querySelector(
         `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-read`
       );
-  
+
       let inProgress = document.querySelector(
         `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-in-progress`
       );
-      
-      unread.classList.remove('checked');
-      read.classList.remove('checked');
-      inProgress.classList.add('checked');
-  
+
+      unread.classList.remove("checked");
+      read.classList.remove("checked");
+      inProgress.classList.add("checked");
     }
   }
-
 });
