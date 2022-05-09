@@ -1,10 +1,12 @@
 const addBookBtn = document.querySelector(".add-btn");
 const booksSection = document.querySelector(".books");
-const switchOption = document.querySelectorAll(".switch-toggle input");
+const bookCard = document.querySelectorAll(".book-card");
 
 let myLibrary = [];
 
 let indexNumCounter = 0;
+
+// Object contructor for the book
 
 function Book(author, title, pages, read, indexNum) {
   this.author = author;
@@ -49,7 +51,7 @@ function createBookCard() {
   pages.classList.add("pages");
 
   let toggleSwitch =
-    '<div class="switch-toggle"><input type="radio" id="toggle-read" name="toggle-read" ><label for="toggle-read">READ</label><input type="radio" id="toggle-in-progress" name="toggle-in-progress"><label for="toggle-in-progress">IN PROGRESS</label><input type="radio" id="toggle-unread" name="toggle-unread"><label for="toggle-unread" >UNREAD</label></div>';
+    '<div class="switch-toggle"><input type="radio" id="toggle-read" name="toggle-read" ><label id="label-toggle-read" for="toggle-read">READ</label><input type="radio" id="toggle-in-progress" name="toggle-in-progress"><label id="label-toggle-in-progress" for="toggle-in-progress">IN PROGRESS</label><input type="radio" id="toggle-unread" name="toggle-unread"><label id="label-toggle-unread" for="toggle-unread" >UNREAD</label></div>';
 
   bookCard.append(author, title, pages);
   bookCard.insertAdjacentHTML("beforeend", toggleSwitch);
@@ -58,84 +60,110 @@ function createBookCard() {
 
   bookCard.setAttribute("data-index-number", indexNumCounter);
 
-//   Add content from the form into a book card
-  let book = myLibrary[indexNumCounter-1];
+  //   Add content from the form into a book card
+  let book = myLibrary[indexNumCounter - 1];
 
   author.textContent = "Author: " + book.author;
   title.textContent = "Title: " + book.title;
   pages.textContent = "Pages: " + book.pages;
 
-  console.log(book.read,book);
+  // console.log(book.read, book);
 
-// Marking relevant read status on the progress bar
+  // Marking relevant read status on the progress bar
 
-      if(book.read === 'in-progress') {
-          let checked = document.querySelector(`[data-index-number="${book.indexNum}"] div.switch-toggle input#toggle-in-progress`);
+  if (book.read === "in-progress") {
+    let checked = document.querySelector(
+      `[data-index-number="${book.indexNum}"] div.switch-toggle input#toggle-in-progress`
+    );
 
-          checked.classList.add('checked');
-      }
-      if(book.read === 'read') {
-          let checked = document.querySelector(`[data-index-number="${book.indexNum}"] div.switch-toggle input#toggle-read`);
-
-          checked.classList.add('checked');
-      }
-      if(book.read === "unread") {
-          let checked = document.querySelector(`[data-index-number="${book.indexNum}"] div.switch-toggle input#toggle-unread`);
-
-          checked.classList.add('checked');
-      }
-
+    checked.classList.add("checked");
   }
+  if (book.read === "read") {
+    let checked = document.querySelector(
+      `[data-index-number="${book.indexNum}"] div.switch-toggle input#toggle-read`
+    );
 
+    checked.classList.add("checked");
+  }
+  if (book.read === "unread") {
+    let checked = document.querySelector(
+      `[data-index-number="${book.indexNum}"] div.switch-toggle input#toggle-unread`
+    );
 
-
-
-  // myLibrary.forEach((book) => {
-
-  //     bookCard.setAttribute('data-index-number', book.indexNum);
-
-  //     author.textContent = 'Author: ' + book.author;
-  //     title.textContent = 'Title: ' + book.title;
-  //     pages.textContent = 'Pages: ' + book.pages;
-
-  //     // Marking relevant read status on the progress bar
-
-  //     if(book.read === 'in-progress') {
-  //         let checked = document.querySelector(`[data-index-number="${book.indexNum}"] div.switch-toggle input#toggle-in-progress`);
-
-  //         checked.classList.add('checked');
-  //     }
-  //     if(book.read) {
-  //         let checked = document.querySelector(`[data-index-number="${book.indexNum}"] div.switch-toggle input#toggle-read`);
-
-  //         checked.classList.add('checked');
-  //     }
-  //     if(!book.read) {
-  //         let checked = document.querySelector(`[data-index-number="${book.indexNum}"] div.switch-toggle input#toggle-unread`);
-
-  //         checked.classList.add('checked');
-  //     }
-
-  // })
-
+    checked.classList.add("checked");
+  }
+}
 
 //////////////////////////////////
 // Toggle switch functionality
 
-// switchOption.forEach(e => {
+document.addEventListener("click", function (e) {
+  
+  if (e.target.id === "label-toggle-unread") {
 
-//     e.addEventListener('click', ()=> {
-//         console.log('I was clicked!');
+    let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
+    console.log(bookIndexNum);
+ 
+    let unread = document.querySelector(
+      `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
+    );
+    let read = document.querySelector(
+      `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-read`
+    );
 
-//         // Remove checked class from all options
-//         switchOption.forEach(e => {
-//             e.classList.remove('checked')
-//         })
+    let inProgress = document.querySelector(
+      `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-in-progress`
+    );
+    
+    unread.classList.add('checked');
+    read.classList.remove('checked');
+    inProgress.classList.remove('checked');
 
-//         // Add checked class to the clicked option
-//         e.classList.add('checked');
-//         console.log('class added to', this)
+  }
 
-//     });
+  if (e.target.id === "label-toggle-read") {
 
-// });
+    let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
+    console.log(bookIndexNum);
+ 
+    let unread = document.querySelector(
+      `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
+    );
+    let read = document.querySelector(
+      `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-read`
+    );
+
+    let inProgress = document.querySelector(
+      `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-in-progress`
+    );
+    
+    unread.classList.remove('checked');
+    read.classList.add('checked');
+    inProgress.classList.remove('checked');
+
+  }
+  if (e.target.id === "label-toggle-in-progress") {
+    {
+
+      let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
+      console.log(bookIndexNum);
+   
+      let unread = document.querySelector(
+        `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
+      );
+      let read = document.querySelector(
+        `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-read`
+      );
+  
+      let inProgress = document.querySelector(
+        `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-in-progress`
+      );
+      
+      unread.classList.remove('checked');
+      read.classList.remove('checked');
+      inProgress.classList.add('checked');
+  
+    }
+  }
+
+});
