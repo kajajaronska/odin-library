@@ -57,8 +57,13 @@ function createBookCard() {
   let toggleSwitch =
     '<div class="switch-toggle"><input type="radio" id="toggle-read" name="toggle-read" ><label id="label-toggle-read" for="toggle-read">READ</label><input type="radio" id="toggle-in-progress" name="toggle-in-progress"><label id="label-toggle-in-progress" for="toggle-in-progress">IN PROGRESS</label><input type="radio" id="toggle-unread" name="toggle-unread"><label id="label-toggle-unread" for="toggle-unread" >UNREAD</label></div>';
 
+
+  let removeBtn = '<button type="button" class="remove-button" title="Remove from the library">-</button>'
+  
   bookCard.append(author, title, pages);
   bookCard.insertAdjacentHTML("beforeend", toggleSwitch);
+  bookCard.insertAdjacentHTML("beforeend", removeBtn);
+
 
   booksSection.append(bookCard);
 
@@ -110,10 +115,14 @@ const resetForm = function () {
 // Toggle switch functionality
 
 document.addEventListener("click", function (e) {
+
   if (e.target.id === "label-toggle-unread") {
     let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
-    console.log(bookIndexNum);
 
+    // Update read status in myLibrary array
+    myLibrary[bookIndexNum - 1].read = "unread";
+
+    // Update read status display
     let unread = document.querySelector(
       `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
     );
@@ -132,8 +141,11 @@ document.addEventListener("click", function (e) {
 
   if (e.target.id === "label-toggle-read") {
     let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
-    console.log(bookIndexNum);
 
+    // Update read status in myLibrary array
+    myLibrary[bookIndexNum - 1].read = "read";
+
+    // Update read status display
     let unread = document.querySelector(
       `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
     );
@@ -149,10 +161,15 @@ document.addEventListener("click", function (e) {
     read.classList.add("checked");
     inProgress.classList.remove("checked");
   }
+
   if (e.target.id === "label-toggle-in-progress") {
-    {
+    
       let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
-      console.log(bookIndexNum);
+
+      // Update read status in myLibrary array
+      myLibrary[bookIndexNum - 1].read = "in-progress";
+
+      // Update read status display
 
       let unread = document.querySelector(
         `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
@@ -169,5 +186,11 @@ document.addEventListener("click", function (e) {
       read.classList.remove("checked");
       inProgress.classList.add("checked");
     }
-  }
-});
+
+    if (e.target.className === "remove-button") {
+      console.log("button was clicked, yay!")
+
+      // Implement removing card from the library function;
+    }
+    
+  });
