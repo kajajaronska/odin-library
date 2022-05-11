@@ -4,12 +4,47 @@ const bookCard = document.querySelectorAll(".book-card");
 
 const form = document.querySelector("form");
 
-let myLibrary = [];
+// let myLibrary = [];
 
-let indexNumCounter = 0;
+// Example library
+let myLibrary = [
+  {
+    author: "Murakami",
+    title: "Norwegian Wood",
+    pages: 234,
+    read: "read",
+    indexNum: 0,
+  },
 
+  {
+    author: "Margaret Atwood",
+    title: "Testaments",
+    pages: 450,
+    read: "in-progress",
+    indexNum: 0,
+  },
+
+  {
+    author: "MAtt Heig",
+    title: "Midnight Library",
+    pages: 200,
+    read: "unread",
+    indexNum: 0,
+  },
+
+  {
+    author: "Michael Urquhart",
+    title: "Not now",
+    pages: 500,
+    read: "read",
+    indexNum: 0,
+  },
+];
+
+let indexNumCounter = myLibrary.length;
+
+////////////////////////////////////////
 // Object contructor for the book
-
 function Book(author, title, pages, read, indexNum) {
   this.author = author;
   this.title = title;
@@ -20,10 +55,12 @@ function Book(author, title, pages, read, indexNum) {
 
 addBookBtn.addEventListener("click", addBookToLibrary);
 
+////////////////////////////////////////
+// Function to add book Object to the Array
 function addBookToLibrary(e) {
   e.preventDefault();
 
-  indexNumCounter++;
+  indexNumCounter = myLibrary.length + 1;
 
   let author = document.getElementById("author").value;
   let title = document.getElementById("title").value;
@@ -34,14 +71,30 @@ function addBookToLibrary(e) {
 
   myLibrary.push(new Book(author, title, pages, read, indexNumCounter));
 
-  createBookCard();
+  displayLibrary();
 
   resetForm();
 
   return;
 }
 
-function createBookCard() {
+////////////////////////////////////////
+// Function to loop through array and display library
+
+function displayLibrary() {
+  // Clearing display before updating with changed myLibrary array
+  while (booksSection.firstChild) {
+    booksSection.firstChild.remove();
+  }
+  myLibrary.forEach((bookObj) => {
+    updateIndexNums();
+    createBookCard(bookObj);
+  });
+}
+
+////////////////////////////////////////
+// Function to create an empty book card
+function createBookCard(book) {
   let bookCard = document.createElement("div");
   bookCard.classList.add("book-card");
 
@@ -57,27 +110,23 @@ function createBookCard() {
   let toggleSwitch =
     '<div class="switch-toggle"><input type="radio" id="toggle-read" name="toggle-read" ><label id="label-toggle-read" for="toggle-read">READ</label><input type="radio" id="toggle-in-progress" name="toggle-in-progress"><label id="label-toggle-in-progress" for="toggle-in-progress">IN PROGRESS</label><input type="radio" id="toggle-unread" name="toggle-unread"><label id="label-toggle-unread" for="toggle-unread" >UNREAD</label></div>';
 
+  let removeBtn =
+    '<button type="button" class="remove-button" title="Remove from the library">-</button>';
 
-  let removeBtn = '<button type="button" class="remove-button" title="Remove from the library">-</button>'
-  
   bookCard.append(author, title, pages);
   bookCard.insertAdjacentHTML("beforeend", toggleSwitch);
   bookCard.insertAdjacentHTML("beforeend", removeBtn);
 
-
   booksSection.append(bookCard);
 
-  bookCard.setAttribute("data-index-number", indexNumCounter);
-
-  //   Add content from the form into a book card
-  let book = myLibrary[indexNumCounter - 1];
+  // Add content from the form into a book card
 
   author.textContent = "Author: " + book.author;
   title.textContent = "Title: " + book.title;
   pages.textContent = "Pages: " + book.pages;
 
-  // console.log(book.read, book);
-
+  // Setting data attribute according to the index number key from the Book object
+  bookCard.setAttribute("data-index-number", book.indexNum);
   // Marking relevant read status on the progress bar
 
   if (book.read === "in-progress") {
@@ -115,7 +164,6 @@ const resetForm = function () {
 // Toggle switch functionality
 
 document.addEventListener("click", function (e) {
-
   if (e.target.id === "label-toggle-unread") {
     let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
 
@@ -163,49 +211,48 @@ document.addEventListener("click", function (e) {
   }
 
   if (e.target.id === "label-toggle-in-progress") {
-    
-      let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
+    let bookIndexNum = e.composedPath()[2].dataset.indexNumber;
 
-      // Update read status in myLibrary array
-      myLibrary[bookIndexNum - 1].read = "in-progress";
+    // Update read status in myLibrary array
+    myLibrary[bookIndexNum - 1].read = "in-progress";
 
-      // Update read status display
+    // Update read status display
 
-      let unread = document.querySelector(
-        `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
-      );
-      let read = document.querySelector(
-        `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-read`
-      );
+    let unread = document.querySelector(
+      `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-unread`
+    );
+    let read = document.querySelector(
+      `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-read`
+    );
 
-      let inProgress = document.querySelector(
-        `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-in-progress`
-      );
+    let inProgress = document.querySelector(
+      `[data-index-number="${bookIndexNum}"] div.switch-toggle input#toggle-in-progress`
+    );
 
-      unread.classList.remove("checked");
-      read.classList.remove("checked");
-      inProgress.classList.add("checked");
-    }
+    unread.classList.remove("checked");
+    read.classList.remove("checked");
+    inProgress.classList.add("checked");
+  }
 
-    if (e.target.className === "remove-button") {
-      console.log("button was clicked, yay!")
+  if (e.target.className === "remove-button") {
+    console.log("button was clicked, yay!");
 
-      console.log(e.composedPath()[1].dataset.indexNumber);
+    console.log(e.composedPath()[1].dataset.indexNumber);
 
-      let bookIndexNum = e.composedPath()[1].dataset.indexNumber;
+    let bookIndexNum = e.composedPath()[1].dataset.indexNumber;
 
-      // Implement removing card from the library function;
+    // Remove the book from myLibrary and update display
+    myLibrary.splice(bookIndexNum - 1, 1);
+    displayLibrary();
+  }
+});
 
-      // 1. Remove the card from display
+// Function to dynamically update index numbers of Objects in the array
 
-
-      // 2. Remove the book from myLibrary 
-
-      myLibrary.splice(bookIndexNum-1,1);
-
-      console.log(myLibrary);
-
-
-    }
-    
+const updateIndexNums = () => {
+  myLibrary.forEach((book, index) => {
+    book.indexNum = index + 1;
   });
+
+  return;
+};
