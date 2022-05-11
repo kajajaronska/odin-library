@@ -190,7 +190,22 @@ document.addEventListener("click", function (e) {
     if (e.target.className === "remove-button") {
       console.log("button was clicked, yay!")
 
+      console.log(e.composedPath()[1].dataset.indexNumber);
+
+      let bookIndexNum = e.composedPath()[1].dataset.indexNumber;
+
       // Implement removing card from the library function;
+
+      // 1. Remove the card from display
+
+
+      // 2. Remove the book from myLibrary 
+
+      myLibrary.splice(bookIndexNum-1,1);
+
+      console.log(myLibrary);
+
+
     }
     
   });
