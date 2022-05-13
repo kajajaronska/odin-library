@@ -25,6 +25,8 @@ body {
   grid-template-columns: 1fr 3fr;
   row-gap: 2rem;
   column-gap: 2rem;
+
+  
 }
 
 .header {
@@ -66,6 +68,10 @@ input {
   padding: 0.2rem;
 }
 
+.hidden-form-display{
+  grid-template-columns: 5rem 3fr;
+}
+
 .books {
   display: grid;
   grid-template-columns: repeat(auto-fit, 250px);
@@ -74,8 +80,15 @@ input {
   margin-top: 1rem;
 }
 
+p{
+  grid-column: 1 / -1;
+  justify-self: center;
+  opacity: 70%;
+
+  font-size: 1.5rem;
+  text-align: center;
+}
 .book-card {
-  /* width: px; */
   height: 200px;
   padding: 1rem;
 
@@ -125,20 +138,10 @@ input {
 
 }
 
-/* .switch-toggle input:checked + label {
-    background-color: var(--purple);
-} */
-
 .checked + label {
   background-color: var(--purple);
   border-radius: 10px;
 }
-
-/* .checked + label{
-    background-color: var(--purple);
-    border-radius: 10px;
-    font-style: bold;
-} */
 
 .checked + input {
   background-color: var(--purple);
@@ -165,4 +168,17 @@ input {
   align-self: flex-end;
 
   cursor: pointer;
+}
+
+.show-form-btn {
+  width: 2rem;
+  height: 2rem;
+
+  margin-left: 0.3rem;
+  border-radius: 50%;
+  background-color: var(--light-salmon);
+}
+
+.hidden {
+  display: none;
 }

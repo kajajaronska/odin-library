@@ -8,10 +8,11 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body class="hidden-form-display">
     <div class="header">Welcome to your Odin Library</div>
     <div class="new-book-form">
-      <form>
+      <button class="show-form-btn" type="button">➕</button>
+      <form class="hidden">
         <div>
           <label for="author">Author</label>
           <input type="text" id="author" name="author" />
@@ -43,6 +44,9 @@
     </div>
 
     <div class="books">
+      
+        <p>Looks a bit empty here 👻 - add your first book by clicking button on your left</p>
+     
       <!-- <div class="book-card">
         <div class="author">Author: Murakami</div>
         <div class="title">Title: Norwegian Wood</div>

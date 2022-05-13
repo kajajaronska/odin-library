@@ -2,44 +2,48 @@ const addBookBtn = document.querySelector(".add-btn");
 const booksSection = document.querySelector(".books");
 const bookCard = document.querySelectorAll(".book-card");
 
-const form = document.querySelector("form");
+const showFormBtn = document.querySelector('.show-form-btn');
+const form = document.querySelector('form');
+const body = document.querySelector('body');
 
-// let myLibrary = [];
+const paragraph = document.querySelector('p');
+
+let myLibrary = [];
 
 // Example library
-let myLibrary = [
-  {
-    author: "Murakami",
-    title: "Norwegian Wood",
-    pages: 234,
-    read: "read",
-    indexNum: 0,
-  },
+// let myLibrary = [
+//   {
+//     author: "Murakami",
+//     title: "Norwegian Wood",
+//     pages: 234,
+//     read: "read",
+//     indexNum: 0,
+//   },
 
-  {
-    author: "Margaret Atwood",
-    title: "Testaments",
-    pages: 450,
-    read: "in-progress",
-    indexNum: 0,
-  },
+//   {
+//     author: "Margaret Atwood",
+//     title: "Testaments",
+//     pages: 450,
+//     read: "in-progress",
+//     indexNum: 0,
+//   },
 
-  {
-    author: "MAtt Heig",
-    title: "Midnight Library",
-    pages: 200,
-    read: "unread",
-    indexNum: 0,
-  },
+//   {
+//     author: "MAtt Heig",
+//     title: "Midnight Library",
+//     pages: 200,
+//     read: "unread",
+//     indexNum: 0,
+//   },
 
-  {
-    author: "Michael Urquhart",
-    title: "Not now",
-    pages: 500,
-    read: "read",
-    indexNum: 0,
-  },
-];
+//   {
+//     author: "Michael Urquhart",
+//     title: "Not now",
+//     pages: 500,
+//     read: "read",
+//     indexNum: 0,
+//   },
+// ];
 
 let indexNumCounter = myLibrary.length;
 
@@ -58,6 +62,7 @@ addBookBtn.addEventListener("click", addBookToLibrary);
 ////////////////////////////////////////
 // Function to add book Object to the Array
 function addBookToLibrary(e) {
+  console.log("button clicked")
   e.preventDefault();
 
   indexNumCounter = myLibrary.length + 1;
@@ -235,14 +240,11 @@ document.addEventListener("click", function (e) {
   }
 
   if (e.target.className === "remove-button") {
-    console.log("button was clicked, yay!");
-
-    console.log(e.composedPath()[1].dataset.indexNumber);
-
     let bookIndexNum = e.composedPath()[1].dataset.indexNumber;
 
     // Remove the book from myLibrary and update display
     myLibrary.splice(bookIndexNum - 1, 1);
+
     displayLibrary();
   }
 });
@@ -256,3 +258,21 @@ const updateIndexNums = () => {
 
   return;
 };
+
+
+//////////////////////////////////
+// Show form button functionality
+
+showFormBtn.addEventListener('click', ()=>{
+ form.classList.toggle('hidden');
+  body.classList.toggle('hidden-form-display');
+ 
+  
+  if(!form.classList.contains('hidden')) showFormBtn.textContent = '➖';
+  else showFormBtn.textContent = '➕'
+})
+
+
+
+
+
