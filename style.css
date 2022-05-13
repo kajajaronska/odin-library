@@ -77,6 +77,22 @@ input {
   padding: 0.2rem;
 }
 
+input:focus {
+  border: solid 0.15rem var(--light-burgundy);
+}
+
+
+
+.add-btn{
+  border-radius: 10px;
+  width: 10rem;
+  padding: 0.2rem;
+  color: rgb(110, 81, 110);
+  background-color: var(--light-salmon);
+  font-weight: bold;
+  
+  margin-top: 1rem;
+}
 .hidden-form-display{
   grid-template-columns: 5rem 3fr;
 }
