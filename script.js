@@ -63,7 +63,7 @@ addBookBtn.addEventListener("click", addBookToLibrary);
 // Function to add book Object to the Array
 function addBookToLibrary(e) {
   console.log("button clicked")
-  e.preventDefault();
+  // e.preventDefault();
 
   indexNumCounter = myLibrary.length + 1;
 
